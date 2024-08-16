@@ -1,8 +1,6 @@
 "use client" // TODO Временно, пока есть useState
 import { useCallback, useState } from "react";
-import { v4 } from 'uuid';
 import { IPost, IPostIBodytem } from "../../../types/post";
-import { PostItemType } from "../../../constants/post";
 import { Grid, Paper } from "@mui/material";
 import PostForm from "../../../components/PostForm";
 import Post from "../../../components/Post";

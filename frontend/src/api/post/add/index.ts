@@ -1,7 +1,7 @@
 import { jsonPostApi } from "../..";
 import { IPost } from "../../../types/post";
 
-const PATH = 'add'
+const PATH = '/post/add'
 
 export const postAddApi = async (data: IPost): Promise<IPost> => {
   const response = await jsonPostApi(PATH, data)
