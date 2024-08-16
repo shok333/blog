@@ -1,15 +1,17 @@
 "use client" // TODO Временно, пока есть useState
 import { useCallback, useState } from "react";
 import { v4 } from 'uuid';
-import { IPostItem } from "../../../types/post";
+import { IPost, IPostIBodytem } from "../../../types/post";
 import { PostItemType } from "../../../constants/post";
 import { Grid, Paper } from "@mui/material";
 import PostForm from "../../../components/PostForm";
 import Post from "../../../components/Post";
+import { useMutation } from "@tanstack/react-query";
+import { postAddApi } from "../../../api/post/add";
 
 const Page = () => {
-  // TODO Возможно стоит использовать state
-  const [postItems, setPostItems] = useState<Array<IPostItem>>([
+  const [title, setTitle] = useState<string>('');
+  const [body, setbody] = useState<Array<IPostIBodytem>>([
     {
       type: PostItemType.H2,
       value: 'Это Mock заголовок 1',
@@ -32,15 +34,26 @@ const Page = () => {
     }
   ]);
 
-  const addItem = useCallback((newPostItem: IPostItem) => {
-    setPostItems(prevPostItems => ([
-      ...prevPostItems,
+  const mutation = useMutation<IPost, Error, IPost>({
+    mutationFn: postAddApi
+  });
+
+  const onSubmit = useCallback(() => {
+    mutation.mutate({
+      title,
+      body,
+    });
+  }, [mutation, title, body]);
+
+  const addItem = useCallback((newPostItem: IPostIBodytem) => {
+    setbody(prevbody => ([
+      ...prevbody,
       newPostItem,
     ]))
   }, []);
 
   const changeValue = useCallback((id: string, value: string) => {
-    setPostItems(prevPostItems => prevPostItems.map((prevPostItem) => {
+    setbody(prevbody => prevbody.map((prevPostItem) => {
       if (prevPostItem.id === id) {
         return {
           ...prevPostItem,
@@ -61,16 +74,20 @@ const Page = () => {
       <Grid item xs={6}>
         <Paper sx={{ padding: 2 }} >
           <PostForm
-            items={postItems}
+            items={body}
             changeValue={changeValue}
             addItem={addItem}
+            onSubmit={onSubmit}
+            isPending={mutation.isPending}
+            isSuccess={mutation.isSuccess}
+            isError={mutation.isError}
           />
         </Paper>
       </Grid>
       <Grid item xs={6}>
         <Paper sx={{ padding: 2 }} >
           <Post
-            items={postItems}
+            items={body}
           />
         </Paper>
       </Grid>

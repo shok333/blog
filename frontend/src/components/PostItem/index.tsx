@@ -2,12 +2,12 @@ import { FC } from "react";
 import { PostItemType } from "../../constants/post";
 import { Typography } from "@mui/material";
 
-interface IPostItemProps {
+interface IPostIBodytemProps {
   type: PostItemType;
   value: string;
 }
 
-const PostItem: FC<IPostItemProps> = ({
+const PostItem: FC<IPostIBodytemProps> = ({
   type,
   value,
 }) => {

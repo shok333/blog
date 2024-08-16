@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { IPostItem } from "../../types/post";
+import { IPostIBodytem } from "../../types/post";
 import PostItem from "../PostItem";
 import { Stack } from "@mui/material";
 
 interface IPostProps {
-  items: Array<IPostItem>;
+  items: Array<IPostIBodytem>;
 }
 
 const Post: FC<IPostProps> = ({
