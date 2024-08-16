@@ -10,7 +10,7 @@ interface IPostFormFieldProps {
   error?: string;
   errors: FieldErrors<FieldValues>;
   register: UseFormRegister<FieldValues>
-  changeValue(id: string, value: string): void;
+  changeValue(value: string, id?: string): void;
 }
 
 const PostFormField: FC<IPostFormFieldProps> = ({
@@ -26,7 +26,7 @@ const PostFormField: FC<IPostFormFieldProps> = ({
 
   const onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = useCallback(
     (e) => {
-      changeValue(id, e.target.value)
+      changeValue(e.target.value, id)
     },
     [id, changeValue]
   );

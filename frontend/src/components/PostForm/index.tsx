@@ -1,17 +1,20 @@
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { IPostIBodytem } from "../../types/post";
 import { useForm } from "react-hook-form";
 import PostAddItemButtons from "../PostAddItemButtons";
 import { Alert, Box, Collapse, Stack } from "@mui/material";
 import { LoadingButton } from '@mui/lab';
 import PostFormField from "../PostFormField";
+import { PostItemType } from "../../constants/post";
 
 interface IPostFormProps {
   isPending: boolean;
   isSuccess: boolean;
   isError: boolean;
-  items: Array<IPostIBodytem>;
-  changeValue(id: string, value: string): void;
+  title: string;
+  body: Array<IPostIBodytem>;
+  setTitle: Dispatch<SetStateAction<string>>
+  changeValue(value: string, id?: string): void;
   addItem(newPostItem: IPostIBodytem): void;
   onSubmit(): void;
 }
@@ -20,7 +23,9 @@ const PostForm: FC<IPostFormProps> = ({
   isPending,
   isSuccess,
   isError,
-  items,
+  title,
+  body,
+  setTitle,
   changeValue,
   addItem,
   onSubmit,
@@ -36,8 +41,16 @@ const PostForm: FC<IPostFormProps> = ({
       })}
     >
       <Stack spacing={2}>
+        <PostFormField
+          id="title"
+          type={PostItemType.H1}
+          value={title}
+          register={register}
+          changeValue={setTitle}
+          errors={errors}
+        />
         {
-          items.map(({ type, value, id }) => (
+          body.map(({ type, value, id }) => (
             <PostFormField
               key={id}
               id={id}

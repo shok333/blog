@@ -25,14 +25,18 @@ const PostAddItemButtons: FC<IPostAddItemButtonsProps> = memo(({
     <ButtonGroup
       variant="outlined"
     >
-      {Object.values(PostItemType).map((type) => (
-        <Button
-          key={type}
-          onClick={onClick(type)}
-        >
-          {type}
-        </Button>
-      ))}
+      {
+        Object.values(PostItemType)
+          .filter((type) => type !== PostItemType.H1)
+          .map((type) => (
+            <Button
+              key={type}
+              onClick={onClick(type)}
+            >
+              {type}
+            </Button>
+          ))
+      }
     </ButtonGroup>
   );
 })

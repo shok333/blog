@@ -9,30 +9,9 @@ import Post from "../../../components/Post";
 import { useMutation } from "@tanstack/react-query";
 import { postAddApi } from "../../../api/post/add";
 
-const Page = () => {
+const PostCreate = () => {
   const [title, setTitle] = useState<string>('');
-  const [body, setbody] = useState<Array<IPostIBodytem>>([
-    {
-      type: PostItemType.H2,
-      value: 'Это Mock заголовок 1',
-      id: v4(),
-    },
-    {
-      type: PostItemType.P,
-      value: 'Это Mock параграф 1 lorem',
-      id: v4(),
-    },
-    {
-      type: PostItemType.H2,
-      value: 'Это Mock заголовок 2',
-      id: v4(),
-    },
-    {
-      type: PostItemType.P,
-      value: 'Это Mock параграф 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id purus metus. Aenean euismod magna eget mauris consequat, at volutpat metus sollicitudin.',
-      id: v4(),
-    }
-  ]);
+  const [body, setbody] = useState<Array<IPostIBodytem>>([]);
 
   const mutation = useMutation<IPost, Error, IPost>({
     mutationFn: postAddApi
@@ -52,7 +31,7 @@ const Page = () => {
     ]))
   }, []);
 
-  const changeValue = useCallback((id: string, value: string) => {
+  const changeValue = useCallback((value: string, id?: string) => {
     setbody(prevbody => prevbody.map((prevPostItem) => {
       if (prevPostItem.id === id) {
         return {
@@ -74,7 +53,9 @@ const Page = () => {
       <Grid item xs={6}>
         <Paper sx={{ padding: 2 }} >
           <PostForm
-            items={body}
+            title={title}
+            body={body}
+            setTitle={setTitle}
             changeValue={changeValue}
             addItem={addItem}
             onSubmit={onSubmit}
@@ -87,6 +68,7 @@ const Page = () => {
       <Grid item xs={6}>
         <Paper sx={{ padding: 2 }} >
           <Post
+            title={title}
             items={body}
           />
         </Paper>
@@ -95,4 +77,4 @@ const Page = () => {
   )
 }
 
-export default Page;
+export default PostCreate;
