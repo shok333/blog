@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import ReactQueryClientProvider from '../components/ReactQueryClientProvider';
 import "./globals.css";
+import { cookies } from 'next/headers';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,11 +18,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = cookies();
+  const csrftoken = cookieStore.get('csrftoken')?.value;
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <AppRouterCacheProvider>
-          <ReactQueryClientProvider>
+          <ReactQueryClientProvider csrftoken={csrftoken}>
             {children}
           </ReactQueryClientProvider>
         </AppRouterCacheProvider>

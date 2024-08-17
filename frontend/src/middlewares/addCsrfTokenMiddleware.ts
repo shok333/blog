@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAddCsrfToken } from "../api/getAddCsrfToken";
+import { ICsrfTokenResponse } from "../types/csrfToken";
+
+// TODO Может вынести куда-то PATH и getAddCsrfToken
+const PATH = '/csrftoken'
+
+export const getAddCsrfToken = async (): Promise<ICsrfTokenResponse> => {
+  const response = await fetch(PATH)
+
+  return await response.json();
+}
 
 export const addCsrfTokenMiddleware = async (request: NextRequest, response: NextResponse) => {
   if (
