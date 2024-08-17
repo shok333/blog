@@ -32,6 +32,10 @@ CSRF_TRUSTED_ORIGINS = [
     'https://localhost:8000',
     'http://127.0.0.1:8000',
     'https://127.0.0.1:8000',
+    'http://localhost:3000',
+    'https://localhost:3000',
+    'http://127.0.0.1:3000',
+    'https://127.0.0.1:3000',
 ]
 
 # Application definition
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     'posts',
     'bboard',
     'users',
+    "corsheaders",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,12 +57,17 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CSRF_COOKIE_NAME = 'csrftoken'
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_SAMESITE = 'None'  # Используйте 'None' для кросс-доменного обмена
 
 ROOT_URLCONF = 'samplesite.urls'
 
@@ -131,3 +141,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'x-csrftoken',
+]

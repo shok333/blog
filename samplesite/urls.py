@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .views import csrf_token_view
 
 urlpatterns = [
     path('comments/', include('comments.urls')),
@@ -23,4 +24,5 @@ urlpatterns = [
     path('bboard/', include('bboard.urls')),
     path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
+    path('csrftoken/', csrf_token_view),
 ]

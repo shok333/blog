@@ -5,14 +5,14 @@ import { Grid, Paper } from "@mui/material";
 import PostForm from "../../../components/PostForm";
 import Post from "../../../components/Post";
 import { useMutation } from "@tanstack/react-query";
-import { postAddApi } from "../../../api/post/add";
+import { postsAddApi } from "../../../api/posts/add";
 
 const PostCreate = () => {
   const [title, setTitle] = useState<string>('');
   const [body, setbody] = useState<Array<IPostIBodytem>>([]);
 
   const mutation = useMutation<IPost, Error, IPost>({
-    mutationFn: postAddApi
+    mutationFn: postsAddApi
   });
 
   const onSubmit = useCallback(() => {
