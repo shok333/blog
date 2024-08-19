@@ -3,15 +3,16 @@ import React from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { IApiConfig } from '../../types/apiConfig'
+import { X_CSRF_TOKEN } from '../../constants/url'
 
 interface IReactQueryClientProvider {
   children: React.ReactNode;
-  csrftoken?: string;
+  xCsrfToken?: string;
 }
 
 export default function ReactQueryClientProvider({
   children,
-  csrftoken = '',
+  xCsrfToken = '',
 }: IReactQueryClientProvider) {
   const [queryClient] = React.useState(() => new QueryClient({
     defaultOptions: {
@@ -24,7 +25,7 @@ export default function ReactQueryClientProvider({
               return fetch(url, {
                 method: 'POST',
                 headers: {
-                  'X-CSRFToken': csrftoken,
+                  [X_CSRF_TOKEN]: xCsrfToken,
                   ...headers,
                 },
                 credentials: 'include',

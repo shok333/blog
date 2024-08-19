@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import ReactQueryClientProvider from '../components/ReactQueryClientProvider';
+import { getXCsrfToken } from '../utils/getXCsrfToken';
 import "./globals.css";
-import { cookies } from 'next/headers';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,14 +18,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = cookies();
-  const csrftoken = cookieStore.get('csrftoken')?.value;
+  const xCsrfToken = getXCsrfToken();
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <AppRouterCacheProvider>
-          <ReactQueryClientProvider csrftoken={csrftoken}>
+          <ReactQueryClientProvider xCsrfToken={xCsrfToken}>
             {children}
           </ReactQueryClientProvider>
         </AppRouterCacheProvider>
