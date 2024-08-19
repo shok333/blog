@@ -8,5 +8,6 @@ export interface IPostIBodytem {
 
 export interface IPost {
   title: string;
-  body: Array<IPostIBodytem>
+  body: Array<IPostIBodytem>;
+  author: string;
 }

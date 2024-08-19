@@ -153,3 +153,7 @@ CORS_ALLOW_HEADERS = [
     'content-type',
     'x-csrftoken',
 ]
+
+SLUGIFY_PROCESSORS = [
+   'project.app.slugify_processors.my_processor'
+]

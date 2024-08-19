@@ -17,6 +17,7 @@ const PostCreate = () => {
     mutation.mutate(postsAddApiConfig({
       title,
       body,
+      author: 'dmitriy_gerasimov' //TODO Потом задать автора правильно
     }));
   }, [mutation, title, body]);
 
