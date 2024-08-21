@@ -1,7 +1,8 @@
+import { IURLSearchParamsTRequest } from "../api/hooks/useCustomQuery";
 import { PostItemType } from "../constants/post";
 import { IPagination } from "./pagination";
 
-export interface IPostIBodytem {
+export interface IPostIBodyItem {
   type: PostItemType;
   value: string;
   id: string;
@@ -9,7 +10,7 @@ export interface IPostIBodytem {
 
 export interface IPost {
   title: string;
-  body: Array<IPostIBodytem>;
+  body: Array<IPostIBodyItem>;
   author: string;
 }
 
@@ -22,4 +23,8 @@ export interface IPostsItem {
 export interface IPaginatedPosts {
   data: Array<IPostsItem>;
   pagination: IPagination;
+}
+
+export interface IPostsShowApiConfigQuery extends IURLSearchParamsTRequest {
+
 }

@@ -35,11 +35,20 @@ def index (request):
       'total': paginator.count,
       'pages': paginator.num_pages
     }
-  })
+  }, status=200)
 
 @require_GET
-def show (request):
-  return HttpResponse('show')
+def show (request, slug):
+  post = Post.objects.get(slug=slug)
+
+  # TODO Заменить name на id пользователя
+  user = User.objects.get(username=post.author)
+  
+  return JsonResponse({
+    'title': post.title,
+    'content': post.content,
+    'author': user.username,
+  }, status=200)
 
 @require_http_methods(["POST"])
 def add (request):

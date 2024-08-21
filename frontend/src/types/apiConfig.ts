@@ -6,7 +6,7 @@ export interface IGetApiConfig<T extends IURLSearchParamsTRequest> {
   url: string,
   method: string,
   headers: HeadersInit,
-  queryParams: T
+  queryParams?: T
 }
 
 export interface IPostApiConfig<T> {

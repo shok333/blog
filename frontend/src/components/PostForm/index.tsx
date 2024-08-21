@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from "react";
-import { IPostIBodytem } from "../../types/post";
+import { IPostIBodyItem } from "../../types/post";
 import { useForm } from "react-hook-form";
 import PostAddItemButtons from "../PostAddItemButtons";
 import { Alert, Box, Collapse, Stack } from "@mui/material";
@@ -12,10 +12,10 @@ interface IPostFormProps {
   isSuccess: boolean;
   isError: boolean;
   title: string;
-  body: Array<IPostIBodytem>;
+  body: Array<IPostIBodyItem>;
   setTitle: Dispatch<SetStateAction<string>>
   changeValue(value: string, id?: string): void;
-  addItem(newPostItem: IPostIBodytem): void;
+  addItem(newPostItem: IPostIBodyItem): void;
   onSubmit(): void;
 }
 

@@ -1,6 +1,6 @@
-"use client" // TODO Временно, пока есть useState
+"use client"
 import { useCallback, useState } from "react";
-import { IPost, IPostIBodytem } from "../../../types/post";
+import { IPost, IPostIBodyItem } from "../../../types/post";
 import { Grid, Paper } from "@mui/material";
 import PostForm from "../../../components/PostForm";
 import Post from "../../../components/Post";
@@ -9,7 +9,7 @@ import { postsAddApiConfig } from "../../../api/apiConfigs/posts/add";
 
 const PostCreate = () => {
   const [title, setTitle] = useState<string>('');
-  const [body, setbody] = useState<Array<IPostIBodytem>>([]);
+  const [body, setbody] = useState<Array<IPostIBodyItem>>([]);
 
   const mutation = useMutation<IPost, Error, any>({}); //TODO Убрать any
 
@@ -21,7 +21,7 @@ const PostCreate = () => {
     }));
   }, [mutation, title, body]);
 
-  const addItem = useCallback((newPostItem: IPostIBodytem) => {
+  const addItem = useCallback((newPostItem: IPostIBodyItem) => {
     setbody(prevbody => ([
       ...prevbody,
       newPostItem,

@@ -19,14 +19,19 @@ export const postJSONConfig = <T>(
 
 export const getJSONConfig = <T extends IURLSearchParamsTRequest>(
   path: string,
-  queryParams: T
+  queryParams?: T
 ): IGetApiConfig<T> => {
-  return {
+  const config: IGetApiConfig<T> = {
     url: `${HOST}${path}`,
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    queryParams,
   }
+
+  if (queryParams) {
+    config.queryParams = queryParams
+  }
+
+  return config;
 }

@@ -17,8 +17,13 @@ export const useCustomQuery = <TRequest extends IURLSearchParamsTRequest, TRespo
   const query = useQuery<TResponse>({
     queryKey,
     queryFn: async (): Promise<TResponse> => {
-      const urlSearchParams = new URLSearchParams(queryParams).toString();
-      const urlWithSearchParams = `${url}?${urlSearchParams}`;
+      const urlWithSearchParams = new URL(url);
+
+      if (queryParams) {
+        Object.entries(queryParams).forEach(([key, value]) => {
+          urlWithSearchParams.searchParams.append(key, value);
+        });
+      }
 
       const response = await fetch(urlWithSearchParams, {
         method,

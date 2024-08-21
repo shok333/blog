@@ -3,12 +3,25 @@ import { v4 } from "uuid";
 import Post from "../../../components/Post";
 import { PostItemType } from "../../../constants/post";
 import { useState } from "react";
-import { IPostIBodytem } from "../../../types/post";
+import { IPost, IPostIBodyItem, IPostsShowApiConfigQuery } from "../../../types/post";
 import { Grid, Paper } from "@mui/material";
+import { postsShowApiConfig } from "../../../api/apiConfigs/posts/show";
+import { useCustomQuery } from "../../../api/hooks/useCustomQuery";
 
-const Page = () => {
-  const [title, setTitle] = useState<string>('Фейковый заголовок');
-  const [body, setbody] = useState<Array<IPostIBodytem>>([
+interface IPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+const Page = ({ params }: IPageProps) => {
+  const { data, isLoading, isSuccess } = useCustomQuery<IPostsShowApiConfigQuery, IPost>(
+    ['post'],
+    postsShowApiConfig(params.slug)
+  )
+
+  const [title] = useState<string>('Фейковый заголовок');
+  const [body, setbody] = useState<Array<IPostIBodyItem>>([
     {
       type: PostItemType.H2,
       value: 'Это Mock заголовок 1',

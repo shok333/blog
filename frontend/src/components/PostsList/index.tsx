@@ -1,9 +1,11 @@
 import { List, ListItem, ListItemText } from "@mui/material"
 import { IPostsItem } from "../../types/post"
+import Link from "next/link"
+
+const POST_PATH = '/posts'
 
 interface IPostsListProps {
   items: Array<IPostsItem>
-
 }
 
 export const PostsList = ({ items }: IPostsListProps) => {
@@ -11,15 +13,19 @@ export const PostsList = ({ items }: IPostsListProps) => {
     <List>
       {
         items.map(({ title, author, slug }) => (
-          <ListItem
-            alignItems="flex-start"
+          <Link
             key={slug}
+            href={`${POST_PATH}/${slug}`}
           >
-            <ListItemText
-              primary={title}
-              secondary={author}
-            />
-          </ListItem>
+            <ListItem
+              alignItems="flex-start"
+            >
+              <ListItemText
+                primary={title}
+                secondary={author}
+              />
+            </ListItem>
+          </Link>
         ))
       }
     </List>

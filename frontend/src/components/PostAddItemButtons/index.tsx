@@ -2,10 +2,10 @@ import { Dispatch, FC, memo, SetStateAction, useCallback } from "react";
 import { v4 } from 'uuid';
 import { Button, ButtonGroup } from "@mui/material";
 import { PostItemType } from "../../constants/post";
-import { IPostIBodytem } from "../../types/post";
+import { IPostIBodyItem } from "../../types/post";
 
 interface IPostAddItemButtonsProps {
-  addItem(newPostItem: IPostIBodytem): void;
+  addItem(newPostItem: IPostIBodyItem): void;
 }
 
 const PostAddItemButtons: FC<IPostAddItemButtonsProps> = memo(({
