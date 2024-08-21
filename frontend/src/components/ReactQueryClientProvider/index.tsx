@@ -22,15 +22,6 @@ export default function ReactQueryClientProvider({
 
           try {
             if (method === 'POST') {
-              console.log('POST', {
-                method: 'POST',
-                headers: {
-                  [X_CSRF_TOKEN]: xCsrfToken,
-                  ...headers,
-                },
-                body: JSON.stringify(data),
-                credentials: 'include',
-              })
               return fetch(url, {
                 method: 'POST',
                 headers: {
