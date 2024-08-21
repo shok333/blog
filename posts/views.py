@@ -1,4 +1,5 @@
 from django.http import HttpResponse, JsonResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.http import require_http_methods, require_GET
 import json
 import datetime
@@ -8,7 +9,33 @@ from django.utils.text import slugify
 
 @require_GET
 def index (request):
-  return HttpResponse('index')
+  page = request.GET.get('page')
+  limit = request.GET.get('limit')
+
+  post_list = Post.objects.all()
+  
+  paginator = Paginator(post_list, limit)
+
+  try:
+      paginated_posts = paginator.page(page)
+      data = list(paginated_posts.object_list.values('title', 'author', 'slug'))
+
+  except PageNotAnInteger:
+      data = []
+      print('PageNotAnInteger')
+  except EmptyPage:
+      data = []
+      print('EmptyPage')
+
+  return JsonResponse({
+    'data': data,
+    'pagination': {
+      'page': page,
+      'limit': limit,
+      'total': paginator.count,
+      'pages': paginator.num_pages
+    }
+  })
 
 @require_GET
 def show (request):
