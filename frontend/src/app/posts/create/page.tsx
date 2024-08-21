@@ -5,7 +5,7 @@ import { Grid, Paper } from "@mui/material";
 import PostForm from "../../../components/PostForm";
 import Post from "../../../components/Post";
 import { useMutation } from "@tanstack/react-query";
-import { postsAddApiConfig } from "../../../apiConfigs/posts/add";
+import { postsAddApiConfig } from "../../../api/apiConfigs/posts/add";
 
 const PostCreate = () => {
   const [title, setTitle] = useState<string>('');

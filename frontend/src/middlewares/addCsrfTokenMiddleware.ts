@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ICsrfTokenResponse } from "../types/csrfToken";
 import { CSRF_TOKEN_COOKIE, HOST, X_CSRF_TOKEN } from "../constants/url";
-import { isPagePathname } from "../utils/isPagePathName";
+import { isPagePathname } from "../utils/isPagePathname";
 
 // TODO Может вынести куда-то PATH и getAddCsrfToken
 const PATH = '/csrftoken'
