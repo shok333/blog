@@ -18,6 +18,7 @@ export const PostsList = ({ items }: IPostsListProps) => {
             href={`${POST_PATH}/${slug}`}
           >
             <ListItem
+              style={{ backgroundColor: 'white' }}
               alignItems="flex-start"
             >
               <ListItemText

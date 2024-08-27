@@ -2,7 +2,7 @@
 import { PostsList } from "../../components/PostsList";
 import { useCustomQuery } from "../../api/hooks/useCustomQuery";
 import { postsApiConfig } from "../../api/apiConfigs/posts";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Paper } from "@mui/material";
 import { IPaginationQuery } from "../../types/pagination";
 import { IPaginatedPosts } from "../../types/post";
 
@@ -23,9 +23,11 @@ const Posts = () => {
 
   if (isSuccess) {
     return (
-      <PostsList
-        items={data.data}
-      />
+      <Paper>
+        <PostsList
+          items={data.data}
+        />
+      </Paper>
     )
   }
 }

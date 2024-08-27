@@ -1,11 +1,11 @@
 "use client"
 import { useCallback, useState } from "react";
-import { IPost, IPostIBodyItem } from "../../../types/post";
 import { Grid, Paper } from "@mui/material";
-import PostForm from "../../../components/PostForm";
-import Post from "../../../components/Post";
 import { useMutation } from "@tanstack/react-query";
-import { postsAddApiConfig } from "../../../api/apiConfigs/posts/add";
+import { IPost, IPostIBodyItem } from "../../../../types/post";
+import { postsAddApiConfig } from "../../../../api/apiConfigs/posts/add";
+import PostForm from "../../../../components/PostForm";
+import Post from "../../../../components/Post";
 
 const PostCreate = () => {
   const [title, setTitle] = useState<string>('');
@@ -44,10 +44,12 @@ const PostCreate = () => {
   return (
     <Grid
       container
-      spacing={2}
-      sx={{ padding: 2 }}
+      spacing={1}
     >
-      <Grid item xs={6}>
+      <Grid
+        item
+        xs={6}
+      >
         <Paper sx={{ padding: 2 }} >
           <PostForm
             title={title}
@@ -62,7 +64,10 @@ const PostCreate = () => {
           />
         </Paper>
       </Grid>
-      <Grid item xs={6}>
+      <Grid
+        item
+        xs={6}
+      >
         <Paper sx={{ padding: 2 }} >
           <Post
             title={title}
