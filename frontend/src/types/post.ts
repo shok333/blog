@@ -10,7 +10,7 @@ export interface IPostIBodyItem {
 
 export interface IPost {
   title: string;
-  body: Array<IPostIBodyItem>;
+  content: Array<IPostIBodyItem>;
   author: string;
 }
 

@@ -46,7 +46,7 @@ def show (request, slug):
   
   return JsonResponse({
     'title': post.title,
-    'content': post.content,
+    'content': json.loads(post.content),
     'author': user.username,
   }, status=200)
 
