@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { IPostIBodyItem, IPostsItemFiles } from "../../types/post";
-import { readFileAsText } from "../../utils/readFileAsText";
+import { readFileAsDataURL } from "../../utils/readFileAsDataURL";
 import Post from "../Post"
 
 interface IPostWithLocalFilesProps {
@@ -22,10 +22,8 @@ export const PostWithLocalFiles: FC<IPostWithLocalFilesProps> = ({
         items.map(async (item) => {
           const file = files[item.id]
 
-          console.log('file', file)
-
           if (file) {
-            const value = await readFileAsText(file);
+            const value = await readFileAsDataURL(file);
 
             return {
               ...item,

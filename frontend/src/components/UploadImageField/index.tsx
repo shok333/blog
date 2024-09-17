@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Button, Avatar } from '@mui/material';
 import { getNewFileName } from '../../utils/getNewFileName';
+import { readFileAsDataURL } from '../../utils/readFileAsDataURL';
 
 interface IUploadImageFieldProps {
   name: string
@@ -18,16 +19,15 @@ export const UploadImageField: FC<IUploadImageFieldProps> = ({
   const [image, setImage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (file) {
-      const reader = new FileReader();
+    const getItemsWithFiles = async () => {
+      if (file) {
+        const result = await readFileAsDataURL(file)
 
-      reader.onloadend = () => {
-        // console.log(888, reader.result as string)
-        setImage(reader.result as string);
-      };
-
-      reader.readAsDataURL(file);
+        setImage(result);
+      }
     }
+
+    getItemsWithFiles();
   }, [file])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
