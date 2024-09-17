@@ -36,9 +36,6 @@ const PostForm: FC<IPostFormProps> = ({
 }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  console.log('body', body)
-  console.log('files', files)
-
   return (
     <Box
       component="form"

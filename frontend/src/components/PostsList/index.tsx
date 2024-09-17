@@ -2,7 +2,7 @@ import { List, ListItem, ListItemText } from "@mui/material"
 import { IPostsItem } from "../../types/post"
 import Link from "next/link"
 
-const POST_PATH = 'api/v1/posts'
+const POST_PATH = '/api/v1/posts'
 
 interface IPostsListProps {
   items: Array<IPostsItem>

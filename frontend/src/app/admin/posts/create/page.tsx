@@ -28,6 +28,7 @@ const PostCreate = () => {
     body.append('postBody', JSON.stringify(postBody))
     body.append('author', 'dmitriy_gerasimov') //TODO Потом задать автора правильно
 
+    console.log(2234)
     Object.entries(files).forEach(([name, file]) => {
       body.append(name, file)
     })

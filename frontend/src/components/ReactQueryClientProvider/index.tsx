@@ -18,6 +18,7 @@ export default function ReactQueryClientProvider({
     defaultOptions: {
       mutations: {
         mutationFn: async (config: unknown): Promise<unknown> => {
+          console.log('mutationFn')
           const { method, url, headers, body } = config as IPostApiConfig;
 
           try {

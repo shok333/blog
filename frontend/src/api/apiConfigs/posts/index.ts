@@ -1,7 +1,7 @@
 import { getJSONConfig } from ".."
 import { IPaginationQuery } from "../../../types/pagination"
 
-const PATH = 'api/v1/posts'
+const PATH = '/api/v1/posts'
 
 type IPostsApiConfigProperty = {
   [P in keyof IPaginationQuery]: string | number;
