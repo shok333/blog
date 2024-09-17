@@ -33,7 +33,6 @@ const PostItem: FC<IPostIBodytemProps> = ({
       );
 
     case PostItemType.IMG:
-      // console.log(777, value)
       return (
         // eslint-disable-next-line @next/next/no-img-element
         <Avatar src={value} alt="uploaded image" sx={{ width: 100, height: 100 }} />

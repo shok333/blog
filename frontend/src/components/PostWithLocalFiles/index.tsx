@@ -2,6 +2,9 @@ import { FC, useEffect, useState } from "react";
 import { IPostIBodyItem, IPostsItemFiles } from "../../types/post";
 import { readFileAsDataURL } from "../../utils/readFileAsDataURL";
 import Post from "../Post"
+import { PostItemType } from "../../constants/post";
+import { HOST } from "../../constants/url";
+import { MEDIA_IMAGES } from "../../constants/path";
 
 interface IPostWithLocalFilesProps {
   title: string;
@@ -20,14 +23,21 @@ export const PostWithLocalFiles: FC<IPostWithLocalFilesProps> = ({
     const getItemsWithFiles = async () => {
       const resoult = await Promise.all(
         items.map(async (item) => {
-          const file = files[item.id]
+          if (item.type === PostItemType.IMG) {
+            const file = files[item.id]
 
-          if (file) {
-            const value = await readFileAsDataURL(file);
+            if (file) {
+              const value = await readFileAsDataURL(file);
+
+              return {
+                ...item,
+                value
+              }
+            }
 
             return {
               ...item,
-              value
+              value: `${HOST}${MEDIA_IMAGES}/${item.value}`
             }
           }
 

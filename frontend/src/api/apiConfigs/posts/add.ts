@@ -1,7 +1,6 @@
 import { postFormDataConfig } from ".."
-
-const PATH = '/api/v1/posts'
+import { POSTS } from "../../../constants/path"
 
 export const postsAddApiConfig = (form: FormData) => {
-  return postFormDataConfig(PATH, form)
+  return postFormDataConfig(POSTS, form)
 }

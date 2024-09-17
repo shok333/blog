@@ -28,7 +28,6 @@ const PostCreate = () => {
     body.append('postBody', JSON.stringify(postBody))
     body.append('author', 'dmitriy_gerasimov') //TODO Потом задать автора правильно
 
-    console.log(2234)
     Object.entries(files).forEach(([name, file]) => {
       body.append(name, file)
     })
@@ -44,7 +43,6 @@ const PostCreate = () => {
   }, []);
 
   const changeValue = useCallback((value: string, id?: string) => {
-    console.log(value, '---', id)
     setPostBody(prevPostBody => prevPostBody.map((prevPostBodyItem) => {
       if (prevPostBodyItem.id === id) {
         return {

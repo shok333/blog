@@ -1,7 +1,6 @@
 import { getJSONConfig } from ".."
-
-const PATH = 'api/v1/posts'
+import { POSTS } from "../../../constants/path"
 
 export const postsShowApiConfig = (slug: string) => {
-  return getJSONConfig(`${PATH}/${slug}`, {})
+  return getJSONConfig(`${POSTS}/${slug}`, {})
 }

@@ -1,10 +1,23 @@
-from rest_framework import viewsets
+from rest_framework import views, response
 from .models import Post
 from .serializers import PostsSerializer
 
-class PostsViewSet(viewsets.ModelViewSet):
-  queryset = Post.objects.all()
-  serializer_class = PostsSerializer
+class PostsView(views.APIView):
+  def get(self, request, format=None):
+    return response.Response({})
+  
+  def post(self, request, format=None):    
+    for file_name in request.FILES:
+      with open(f'media/images/{file_name}.png', 'wb+') as destination:
+        print(123, destination)
+        for chunk in request.FILES[file_name].chunks():
+          destination.write(chunk)
+
+    return response.Response({})
+
+# class PostsViewSet(viewsets.ModelViewSet):
+#   queryset = Post.objects.all()
+#   serializer_class = PostsSerializer
 
 # from django.http import HttpResponse, JsonResponse
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger

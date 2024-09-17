@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import csrf_token_view
-from posts.urls import postsRouter
+from django.conf import settings
+from django.conf.urls.static import static
+
+# from posts.urls import postsRouter
 
 urlpatterns = [
     # path('comments/', include('comments.urls')),
@@ -26,5 +29,9 @@ urlpatterns = [
     # path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
     path('csrftoken/', csrf_token_view),
-    path('api/v1/', include(postsRouter.urls)),
+    path('api/v1/', include('posts.urls')),
+    # path('api/v1/', include(postsRouter.urls)),
 ]
+
+if settings.DEBUG: 
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

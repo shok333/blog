@@ -1,8 +1,7 @@
 import { List, ListItem, ListItemText } from "@mui/material"
 import { IPostsItem } from "../../types/post"
 import Link from "next/link"
-
-const POST_PATH = '/api/v1/posts'
+import { POSTS } from "../../constants/path"
 
 interface IPostsListProps {
   items: Array<IPostsItem>
@@ -15,7 +14,7 @@ export const PostsList = ({ items }: IPostsListProps) => {
         items.map(({ title, author, slug }) => (
           <Link
             key={slug}
-            href={`${POST_PATH}/${slug}`}
+            href={`${POSTS}/${slug}`}
           >
             <ListItem
               style={{ backgroundColor: 'white' }}
