@@ -3,17 +3,29 @@ import { IGetApiConfig, IPostApiConfig } from "../../types/apiConfig"
 import { IURLSearchParamsTRequest } from "../hooks/useCustomQuery"
 
 
-export const postJSONConfig = <T>(
+export const postJSONConfig = (
   path: string,
-  data: T
-): IPostApiConfig<T> => {
+  body: string
+): IPostApiConfig => {
   return {
     url: `${HOST}${path}`,
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    data,
+    body,
+  }
+}
+
+export const postFormDataConfig = (
+  path: string,
+  body: FormData
+): IPostApiConfig => {
+  return {
+    url: `${HOST}${path}`,
+    method: 'POST',
+    headers: {},
+    body,
   }
 }
 

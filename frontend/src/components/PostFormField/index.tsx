@@ -2,6 +2,7 @@ import { ChangeEventHandler, FC, useCallback } from "react";
 import { TextField } from "@mui/material";
 import { PostItemType } from "../../constants/post";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { UploadImageField } from "../UploadImageField";
 
 interface IPostFormFieldProps {
   type: PostItemType;
@@ -9,8 +10,10 @@ interface IPostFormFieldProps {
   value: string;
   error?: string;
   errors: FieldErrors<FieldValues>;
+  file?: File;
   register: UseFormRegister<FieldValues>
   changeValue(value: string, id?: string): void;
+  addPostsItemFile(name: string, file: File): void
 }
 
 const PostFormField: FC<IPostFormFieldProps> = ({
@@ -18,8 +21,10 @@ const PostFormField: FC<IPostFormFieldProps> = ({
   id,
   value,
   errors,
+  file,
   register,
   changeValue,
+  addPostsItemFile,
 }) => {
   const helperText = String(errors[id]?.message || '');
   const error = Boolean(helperText);
@@ -56,6 +61,15 @@ const PostFormField: FC<IPostFormFieldProps> = ({
           error={error}
           onChange={onChange}
         />
+      );
+
+    case PostItemType.IMG:
+      return (
+        <UploadImageField
+          name={id}
+          file={file}
+          changeValue={changeValue}
+          addPostsItemFile={addPostsItemFile} />
       );
 
     default:

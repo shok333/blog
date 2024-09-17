@@ -18,7 +18,7 @@ export default function ReactQueryClientProvider({
     defaultOptions: {
       mutations: {
         mutationFn: async (config: unknown): Promise<unknown> => {
-          const { method, url, headers, data } = config as IPostApiConfig<unknown>;
+          const { method, url, headers, body } = config as IPostApiConfig;
 
           try {
             if (method === 'POST') {
@@ -28,7 +28,7 @@ export default function ReactQueryClientProvider({
                   [X_CSRF_TOKEN]: xCsrfToken,
                   ...headers,
                 },
-                body: JSON.stringify(data),
+                body,
                 credentials: 'include',
               })
             }

@@ -22,31 +22,36 @@ export const Header = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            sx={{ display: { xs: 'block', lg: 'none' } }}
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={handleDrawerToggle}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <HeaderMenuList row />
-        </Toolbar>
-      </AppBar>
+    <AppBar
+      sx={{
+        position: 'sticky',
+        top: 0,
+      }}
+    >
+      <Toolbar>
+        <IconButton
+          sx={{
+            display: { xs: 'block', lg: 'none' }
+          }}
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          onClick={handleDrawerToggle}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          News
+        </Typography>
+        <HeaderMenuList row />
+      </Toolbar>
       <Drawer
         open={isDrawerOpened}
         onClose={onClose}
       >
         <HeaderMenuList mobile />
       </Drawer>
-    </Box>
+    </AppBar>
   );
 }

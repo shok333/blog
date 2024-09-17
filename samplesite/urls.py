@@ -17,12 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import csrf_token_view
+from posts.urls import postsRouter
 
 urlpatterns = [
-    path('comments/', include('comments.urls')),
-    path('posts/', include('posts.urls')),
-    path('bboard/', include('bboard.urls')),
-    path('users/', include('users.urls')),
+    # path('comments/', include('comments.urls')),
+    # path('posts/', include('posts.urls')),
+    # path('bboard/', include('bboard.urls')),
+    # path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
     path('csrftoken/', csrf_token_view),
+    path('api/v1/', include(postsRouter.urls)),
 ]

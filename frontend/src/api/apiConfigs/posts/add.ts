@@ -1,8 +1,7 @@
-import { postJSONConfig } from ".."
-import { IPost } from "../../../types/post"
+import { postFormDataConfig } from ".."
 
-const PATH = '/posts/add'
+const PATH = 'api/v1/posts'
 
-export const postsAddApiConfig = (data: IPost) => {
-  return postJSONConfig(PATH, data)
+export const postsAddApiConfig = (form: FormData) => {
+  return postFormDataConfig(PATH, form)
 }

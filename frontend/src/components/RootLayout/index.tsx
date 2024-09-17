@@ -10,38 +10,48 @@ interface IRootLayoutProps {
 
 const RootLayout = ({ children }: IRootLayoutProps) => {
   return (
-    <Grid>
-      <Header />
-      <Grid
-        container
-        justifyContent="center"
-        spacing={1}
-      >
+    <Grid
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100%',
+        position: 'sticky',
+        top: 0,
+        // flexGrow: 1
+      }}
+    >
+      <Grid>
+        <Header />
         <Grid
-          item
-          xs={12}
-          md={10}
-          lg={8}
-          xl={6}
+          container
+          justifyContent="center"
+          spacing={1}
           sx={{
-            maxWidth: '800px !important'
-          }}
-        >
-          {children}
-        </Grid>
-        <Grid
-          item
-          xs={0}
-          lg={4}
-          sx={{
-            display: { xs: 'none', lg: 'block' },
-            maxWidth: '400px !important'
+            flexGrow: 1
           }}
         >
           <Grid
+            item
+            xs={12}
+            md={10}
+            lg={8}
+            xl={6}
             sx={{
+              maxWidth: '800px !important'
+            }}
+          >
+            {children}
+          </Grid>
+          <Grid
+            item
+            xs={0}
+            lg={4}
+            sx={{
+              display: { xs: 'none', lg: 'block' },
+              maxWidth: '400px !important',
+              height: 'max(100vh - 84px)',
+              top: '84px',
               position: 'sticky',
-              top: 0
             }}
           >
             <Acide />

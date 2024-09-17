@@ -2,42 +2,57 @@
 import { useCallback, useState } from "react";
 import { Grid, Paper } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
-import { IPost, IPostIBodyItem } from "../../../../types/post";
+import { IPost, IPostIBodyItem, IPostsItemFiles } from "../../../../types/post";
 import { postsAddApiConfig } from "../../../../api/apiConfigs/posts/add";
 import PostForm from "../../../../components/PostForm";
-import Post from "../../../../components/Post";
+import { PostWithLocalFiles } from "../../../../components/PostWithLocalFiles";
 
 const PostCreate = () => {
   const [title, setTitle] = useState<string>('');
-  const [body, setbody] = useState<Array<IPostIBodyItem>>([]);
+  const [postBody, setPostBody] = useState<Array<IPostIBodyItem>>([]);
+  const [files, setFiles] = useState<IPostsItemFiles>({});
 
   const mutation = useMutation<IPost, Error, any>({}); //TODO Убрать any
 
+  const addPostsItemFile = useCallback((name: string, file: File) => {
+    setFiles((prevFiles: IPostsItemFiles) => ({
+      ...prevFiles,
+      [name]: file
+    }))
+  }, [])
+
   const onSubmit = useCallback(() => {
-    mutation.mutate(postsAddApiConfig({
-      title,
-      body,
-      author: 'dmitriy_gerasimov' //TODO Потом задать автора правильно
-    }));
-  }, [mutation, title, body]);
+    const body = new FormData()
+
+    body.append('title', title)
+    body.append('postBody', JSON.stringify(postBody))
+    body.append('author', 'dmitriy_gerasimov') //TODO Потом задать автора правильно
+
+    Object.entries(files).forEach(([name, file]) => {
+      body.append(name, file)
+    })
+
+    mutation.mutate(postsAddApiConfig(body));
+  }, [title, postBody, files, mutation]);
 
   const addItem = useCallback((newPostItem: IPostIBodyItem) => {
-    setbody(prevbody => ([
-      ...prevbody,
+    setPostBody(prevPostBody => ([
+      ...prevPostBody,
       newPostItem,
     ]))
   }, []);
 
   const changeValue = useCallback((value: string, id?: string) => {
-    setbody(prevbody => prevbody.map((prevPostItem) => {
-      if (prevPostItem.id === id) {
+    console.log(value, '---', id)
+    setPostBody(prevPostBody => prevPostBody.map((prevPostBodyItem) => {
+      if (prevPostBodyItem.id === id) {
         return {
-          ...prevPostItem,
+          ...prevPostBodyItem,
           value,
         }
       }
 
-      return prevPostItem;
+      return prevPostBodyItem;
     }))
   }, []);
 
@@ -53,10 +68,12 @@ const PostCreate = () => {
         <Paper sx={{ padding: 2 }} >
           <PostForm
             title={title}
-            body={body}
+            body={postBody}
+            files={files}
             setTitle={setTitle}
             changeValue={changeValue}
             addItem={addItem}
+            addPostsItemFile={addPostsItemFile}
             onSubmit={onSubmit}
             isPending={mutation.isPending}
             isSuccess={mutation.isSuccess}
@@ -69,9 +86,10 @@ const PostCreate = () => {
         xs={6}
       >
         <Paper sx={{ padding: 2 }} >
-          <Post
+          <PostWithLocalFiles
             title={title}
-            items={body}
+            items={postBody}
+            files={files}
           />
         </Paper>
       </Grid>

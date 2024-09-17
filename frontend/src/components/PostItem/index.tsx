@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { PostItemType } from "../../constants/post";
-import { Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 
 interface IPostIBodytemProps {
   type: PostItemType;
@@ -32,6 +32,12 @@ const PostItem: FC<IPostIBodytemProps> = ({
         </Typography>
       );
 
+    case PostItemType.IMG:
+      // console.log(777, value)
+      return (
+        // eslint-disable-next-line @next/next/no-img-element
+        <Avatar src={value} alt="uploaded image" sx={{ width: 100, height: 100 }} />
+      );
     default:
       return (
         <Typography

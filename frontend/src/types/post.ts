@@ -28,3 +28,7 @@ export interface IPaginatedPosts {
 export interface IPostsShowApiConfigQuery extends IURLSearchParamsTRequest {
 
 }
+
+export interface IPostsItemFiles {
+  [key: string]: File,
+}

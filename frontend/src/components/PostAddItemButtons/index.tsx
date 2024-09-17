@@ -1,4 +1,4 @@
-import { Dispatch, FC, memo, SetStateAction, useCallback } from "react";
+import { FC, memo, useCallback } from "react";
 import { v4 } from 'uuid';
 import { Button, ButtonGroup } from "@mui/material";
 import { PostItemType } from "../../constants/post";

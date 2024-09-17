@@ -9,9 +9,9 @@ export interface IGetApiConfig<T extends IURLSearchParamsTRequest> {
   queryParams?: T
 }
 
-export interface IPostApiConfig<T> {
+export interface IPostApiConfig {
   url: string,
   method: string,
   headers: object,
-  data: T
+  body: string | FormData | URLSearchParams | Blob | ArrayBuffer | ArrayBufferView;
 }

@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from "react";
-import { IPostIBodyItem } from "../../types/post";
+import { IPostIBodyItem, IPostsItemFiles } from "../../types/post";
 import { useForm } from "react-hook-form";
 import PostAddItemButtons from "../PostAddItemButtons";
 import { Alert, Box, Collapse, Stack } from "@mui/material";
@@ -13,7 +13,9 @@ interface IPostFormProps {
   isError: boolean;
   title: string;
   body: Array<IPostIBodyItem>;
+  files: IPostsItemFiles;
   setTitle: Dispatch<SetStateAction<string>>
+  addPostsItemFile(name: string, file: File): void
   changeValue(value: string, id?: string): void;
   addItem(newPostItem: IPostIBodyItem): void;
   onSubmit(): void;
@@ -25,12 +27,17 @@ const PostForm: FC<IPostFormProps> = ({
   isError,
   title,
   body,
+  files,
   setTitle,
+  addPostsItemFile,
   changeValue,
   addItem,
   onSubmit,
 }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+
+  console.log('body', body)
+  console.log('files', files)
 
   return (
     <Box
@@ -47,6 +54,7 @@ const PostForm: FC<IPostFormProps> = ({
           value={title}
           register={register}
           changeValue={setTitle}
+          addPostsItemFile={addPostsItemFile}
           errors={errors}
         />
         {
@@ -56,8 +64,10 @@ const PostForm: FC<IPostFormProps> = ({
               id={id}
               type={type}
               value={value}
+              file={files[id]}
               register={register}
               changeValue={changeValue}
+              addPostsItemFile={addPostsItemFile}
               errors={errors}
             />
           ))
